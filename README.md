@@ -7,7 +7,7 @@
 [![MCP JSON-RPC 2.0](https://img.shields.io/badge/MCP_Server-JSON--RPC_2.0-6A3D9A.svg)](#model-context-protocol-mcp-integration)
 [![License: MIT](https://img.shields.io/badge/License-MIT-2CA02C.svg)](LICENSE)
 
-`ChemLit-Kinetics-Miner` is a closed-loop **AI4Science literature curation and domain-physics verification engine** designed to mine bimolecular aqueous oxidation rate constants ($k_{\text{O}_3}$, $k_{\bullet\text{OH}}$, $k_{\text{SO}_4^{\bullet-}}$, $k_{\text{ClO}^\bullet}$), experimental water-chemistry conditions ($\text{pH}$, $T$, $\text{p}K_a$, buffer matrix, radical scavengers), and canonical molecular structures (`SMILES`, `InChIKey`) from noisy environmental chemistry papers.
+`ChemLit-Kinetics-Miner` is a closed-loop **AI4Science literature curation and domain-physics verification engine** designed to mine bimolecular aqueous oxidation rate constants ($`k_{\text{O}_3}`$, $`k_{\bullet\text{OH}}`$, $`k_{\text{SO}_4^{\bullet-}}`$, $`k_{\text{ClO}^\bullet}`$), experimental water-chemistry conditions ($`\text{pH}`$, $`T`$, $`\text{p}K_a`$, buffer matrix, radical scavengers), and canonical molecular structures (`SMILES`, `InChIKey`) from noisy environmental chemistry papers.
 
 ---
 
@@ -15,7 +15,7 @@
 
 `ChemLit-Kinetics-Miner` unifies three complementary lines of work into a single verifiable scientific extraction stack:
 
-1. **`DECAT` (Environmental Aquatic Chemistry & Reaction Kinetics Curation)**: Domain-grounded modeling of ozone and radical oxidation kinetics across dissociating organic micropollutants (phenols, sulfonamides, $\beta$-blockers, $s$-triazines, olefins, and amines), enforcing physical rate bounds and Henderson–Hasselbalch speciation laws.
+1. **`DECAT` (Environmental Aquatic Chemistry & Reaction Kinetics Curation)**: Domain-grounded modeling of ozone and radical oxidation kinetics across dissociating organic micropollutants (phenols, sulfonamides, $`\beta`$-blockers, $`s`$-triazines, olefins, and amines), enforcing physical rate bounds and Henderson–Hasselbalch speciation laws.
 2. **`shiye` / 识页 (Local-First Scientific Document & Formula/Table OCR Parsing)**: Tolerant parsing of Markdown pipe tables, LaTeX `\begin{tabular}` environments, table footnotes, and OCR-degraded scientific notations (`(3.2 ± 0.4) × 10^5 M^-1 s^-1`, `1.8 \cdot 10^{-2} L mol^{-1} s^{-1}`, `k_O3 < 0.1`, `10⁵`, `l0^5`, `1O^3`).
 3. **`OmniHarness` & `local-chat-insights` (Dual-Agent Cross-Verification & Provenance)**: A `Generator × Domain-Physics Auditor` architecture that cross-checks extracted table rows against body prose, deterministically repairs recoverable OCR/column-shift errors, rejects chemical/physical hallucinations, and binds every accepted record to an exact `[char_start:char_end]` verbatim document span.
 
@@ -33,7 +33,7 @@ flowchart LR
 
 ## Cheminformatics & Domain-Physics Audit Rules
 
-Single-pass LLM and naive regex extractors routinely contaminate kinetic databases with broken OCSR SMILES, $1000\times$ millimolar unit inversions, OCR exponent misreads, and transposed $\text{pH}/\text{p}K_a$ columns. `ChemLit-Kinetics-Miner` enforces four hard scientific guardrails:
+Single-pass LLM and naive regex extractors routinely contaminate kinetic databases with broken OCSR SMILES, $`1000\times`$ millimolar unit inversions, OCR exponent misreads, and transposed $`\text{pH}/\text{p}K_a`$ columns. `ChemLit-Kinetics-Miner` enforces four hard scientific guardrails:
 
 ### 1. RDKit Valence, Ring & Skeleton Verification (`chemlit_miner/chem_validator.py`)
 - Sanitizes raw SMILES via `RDKit` (`DetectChemistryProblems` + `SanitizeMol` + `AssignStereochemistry`), rejecting pentavalent carbons (e.g., `CC(=O)(=O)C`), pentavalent neutral nitrogens, and unclosed aromatic rings (`c1ccccc`).
@@ -41,27 +41,35 @@ Single-pass LLM and naive regex extractors routinely contaminate kinetic databas
 - Cross-checks the 14-character `InChIKey` connectivity layer against named micropollutant skeletons to catch LLM name–structure mismatches.
 
 ### 2. Second-Order Unit Normalization & Logarithmic Parity Check
-All second-order rate constants are converted to canonical $\text{M}^{-1}\text{s}^{-1}$ ($\equiv \text{L}\cdot\text{mol}^{-1}\cdot\text{s}^{-1}$):
+All second-order rate constants are converted to canonical $`\text{M}^{-1}\text{s}^{-1}`$ ($`\equiv \text{L}\cdot\text{mol}^{-1}\cdot\text{s}^{-1}`$):
 
-$$1\;\text{mM}^{-1}\text{s}^{-1} = 10^3\;\text{M}^{-1}\text{s}^{-1}, \qquad 1\;\text{M}^{-1}\text{min}^{-1} = \frac{1}{60}\;\text{M}^{-1}\text{s}^{-1}, \qquad 1\;\text{cm}^3\,\text{molecule}^{-1}\text{s}^{-1} = 10^{-3} N_{\text{A}}\;\text{M}^{-1}\text{s}^{-1}$$
+```math
+1\;\text{mM}^{-1}\text{s}^{-1} = 10^3\;\text{M}^{-1}\text{s}^{-1}, \qquad 1\;\text{M}^{-1}\text{min}^{-1} = \frac{1}{60}\;\text{M}^{-1}\text{s}^{-1}, \qquad 1\;\text{cm}^3\,\text{molecule}^{-1}\text{s}^{-1} = 10^{-3} N_{\text{A}}\;\text{M}^{-1}\text{s}^{-1}
+```
 
-Pseudo-first-order decay constants ($\text{min}^{-1}$, $\text{s}^{-1}$) lacking oxidant concentration dimensions are flagged (`PSEUDO_FIRST_ORDER_UNIT`). Whenever $\log_{10} k$ is co-reported, the auditor enforces:
+Pseudo-first-order decay constants ($`\text{min}^{-1}`$, $`\text{s}^{-1}`$) lacking oxidant concentration dimensions are flagged (`PSEUDO_FIRST_ORDER_UNIT`). Whenever $`\log_{10} k`$ is co-reported, the auditor enforces:
 
-$$\left|\log_{10}\!\left(k_{\text{norm}}\right) - \text{reported }\log_{10} k\right| \le \tau \quad (\tau = 0.08)$$
+```math
+\left|\log_{10}\!\left(k_{\text{norm}}\right) - \text{reported }\log_{10} k\right| \le \tau \quad (\tau = 0.08)
+```
 
-catching $10\times\text{--}1000\times$ OCR exponent misreads and omitted footnote unit multipliers.
+catching $`10\times\text{--}1000\times`$ OCR exponent misreads and omitted footnote unit multipliers.
 
 ### 3. Smoluchowski Aqueous Diffusion Bound & Thermodynamic Bounds
 Bimolecular aqueous oxidation reactions cannot exceed the Smoluchowski diffusion-controlled encounter limit at ambient conditions:
 
-$$0 < k_{\text{norm}} \le k_{\text{diff, max}} = 2.5 \times 10^{10}\;\text{M}^{-1}\text{s}^{-1}, \qquad T_{\text{K}} = T_{^\circ\text{C}} + 273.15 > 0\;\text{K}$$
+```math
+0 < k_{\text{norm}} \le k_{\text{diff, max}} = 2.5 \times 10^{10}\;\text{M}^{-1}\text{s}^{-1}, \qquad T_{\text{K}} = T_{^\circ\text{C}} + 273.15 > 0\;\text{K}
+```
 
 ### 4. Henderson–Hasselbalch Acid–Base Speciation Physics
-Because ozone ($E^\circ = 2.07\;\text{V}$) is a highly selective electrophile, deprotonated phenolate ($\text{A}^-$) and neutral amine ($\text{B}$) species react $10^4\text{--}10^7\times$ faster than their conjugate acids ($\text{HA}$ / $\text{BH}^+$). When intrinsic species constants $(k_{\text{HA}}, k_{\text{A}^-})$ and $\text{p}K_a$ are available, the auditor verifies:
+Because ozone ($`E^\circ = 2.07\;\text{V}`$) is a highly selective electrophile, deprotonated phenolate ($`\text{A}^-`$) and neutral amine ($`\text{B}`$) species react $`10^4\text{--}10^7\times`$ faster than their conjugate acids ($`\text{HA}`$ / $`\text{BH}^+`$). When intrinsic species constants $`(k_{\text{HA}}, k_{\text{A}^-})`$ and $`\text{p}K_a`$ are available, the auditor verifies:
 
-$$k_{\text{app}}(\text{pH}) = \alpha_0(\text{pH})\,k_{\text{HA}} + \alpha_1(\text{pH})\,k_{\text{A}^-}, \qquad \alpha_1(\text{pH}) = \frac{1}{1 + 10^{\text{p}K_a - \text{pH}}}, \quad \alpha_0(\text{pH}) = 1 - \alpha_1(\text{pH})$$
+```math
+k_{\text{app}}(\text{pH}) = \alpha_0(\text{pH})\,k_{\text{HA}} + \alpha_1(\text{pH})\,k_{\text{A}^-}, \qquad \alpha_1(\text{pH}) = \frac{1}{1 + 10^{\text{p}K_a - \text{pH}}}, \quad \alpha_0(\text{pH}) = 1 - \alpha_1(\text{pH})
+```
 
-(with full diprotic extension $\alpha_0 k_0 + \alpha_1 k_1 + \alpha_2 k_2$ for ampholytes). If $k_{\text{app}}$ fails under reported $(\text{pH}, \text{p}K_a)$ but satisfies the equation upon transposing $\text{pH} \leftrightarrow \text{p}K_a$ (corroborated by prose/reference $\text{p}K_a$), the auditor deterministically unswaps the transposed table columns (`AUTO_REPAIRED`).
+(with full diprotic extension $`\alpha_0 k_0 + \alpha_1 k_1 + \alpha_2 k_2`$ for ampholytes). If $`k_{\text{app}}`$ fails under reported $`(\text{pH}, \text{p}K_a)`$ but satisfies the equation upon transposing $`\text{pH} \leftrightarrow \text{p}K_a`$ (corroborated by prose/reference $`\text{p}K_a`$), the auditor deterministically unswaps the transposed table columns (`AUTO_REPAIRED`).
 
 ---
 
@@ -95,8 +103,8 @@ We evaluate three progressive pipeline configurations on `data/benchmark_corpus.
 
 `chemlit_miner/mcp_server.py` implements a zero-external-framework **MCP JSON-RPC 2.0 stdio server** exposing three structured tools:
 - `extract_kinetics_records`: End-to-end dual-agent extraction, RDKit canonicalization, physics verification, and `[char_start:char_end]` provenance binding.
-- `validate_smiles_and_units`: Standalone RDKit sanitization + rate unit conversion + $\log_{10} k$ & Smoluchowski diffusion limit audit.
-- `verify_speciation_kinetics`: Standalone monoprotic/diprotic Henderson–Hasselbalch $k_{\text{app}}(\text{pH})$ consistency & $\text{pH}\leftrightarrow\text{p}K_a$ swap checker.
+- `validate_smiles_and_units`: Standalone RDKit sanitization + rate unit conversion + $`\log_{10} k`$ & Smoluchowski diffusion limit audit.
+- `verify_speciation_kinetics`: Standalone monoprotic/diprotic Henderson–Hasselbalch $`k_{\text{app}}(\text{pH})`$ consistency & $`\text{pH}\leftrightarrow\text{p}K_a`$ swap checker.
 
 Mount directly into **Claude Code**, **Codex**, **Cursor**, or **`OmniHarness`** (`mcpServers` configuration):
 
