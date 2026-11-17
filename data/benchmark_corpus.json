@@ -1,0 +1,1709 @@
+{
+  "benchmark_name": "ChemLit-Kinetics-Miner Gold Benchmark v1.0",
+  "description": "48 environmental oxidation literature excerpts (Markdown tables, LaTeX tabulars, and scientific OCR/prose) across 6 micropollutant families (Phenols, Sulfonamides, Beta-blockers, Triazines, Olefins, Amines) with gold canonical RDKit structures, standardized rate constants (M^-1 s^-1), and injected failure modes.",
+  "num_documents": 48,
+  "num_gold_records": 80,
+  "num_injected_traps": 18,
+  "documents": [
+    {
+      "doc_id": "DOC_001",
+      "source_citation": "Hoigne & Bader (1983) Water Res. 17, 185-194 (adapted excerpt)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Aqueous ozonation experiments were conducted in 10 mM phosphate buffer at pH = 7.0 and T = 20 °C in the presence of tert-butanol (10 mM) as radical scavenger.\n\n| Compound | SMILES | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| Phenol | Oc1ccccc1 | O3 | (1.57 ± 0.12) × 10^6 | 6.20 | 7.0 | 9.95 | 1.3 × 10^3 | 1.4 × 10^9 |\n| 4-Chlorophenol | Oc1ccc(Cl)cc1 | O3 | 2.34 × 10^6 | 6.37 | 7.0 | 9.41 | 6.0 × 10^2 | 6.0 × 10^8 |\n\nFor Phenol (pKa = 9.95), the apparent rate constant at pH = 7.0 was k_O3 = (1.57 ± 0.12) × 10^6 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Phenol",
+          "compound_class": "Phenols",
+          "inchikey": "ISWSIDIOOBJBQZ-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 1570000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.95,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "4-Chlorophenol",
+          "compound_class": "Phenols",
+          "inchikey": "WXNZTHHGJRFXKQ-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1ccc(Cl)cc1",
+          "oxidant": "O3",
+          "standardized_k": 2340000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.41,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_002",
+      "source_citation": "Suarez et al. (2007) Environ. Sci. Technol. 41, 3434 (OCR column-swap benchmark)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Ozonation of chlorinated phenolic antimicrobials was investigated at pH = 7.0 (phosphate buffer) and T = 298 K.\n\n| Compound | SMILES | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| Triclosan | Oc1cc(Cl)ccc1Oc1ccc(Cl)cc1Cl | O3 | 4.25 × 10^6 | 6.63 | 7.90 | 7.00 | 13 | 3.8 × 10^7 |\n\nAt pH 7.0, Triclosan (pKa = 7.90) exhibited rapid ozone abatement with k_O3 = 4.25 × 10^6 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Triclosan",
+          "compound_class": "Phenols",
+          "inchikey": "XEFQLINVKFYRCS-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1cc(Cl)ccc1Oc1ccc(Cl)cc1Cl",
+          "oxidant": "O3",
+          "standardized_k": 4250000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 7.9,
+          "temperature_c": 24.85,
+          "failure_category": "PH_PKA_SWAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_003",
+      "source_citation": "Deborde et al. (2005) Water Res. (OCSR valence hallucination test)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Hydroxyl radical competition kinetics in ultrapure water at pH = 7.0 and 25 °C.\n\n| Compound | SMILES | Oxidant | k (L mol^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Bisphenol A | CC(=O)(=O)(c1ccc(O)cc1)c1ccc(O)cc1 | •OH | 1.02 × 10^10 | 10.01 | 7.0 | 25.0 |\n| Acetaminophen | CC(=O)Nc1ccc(O)cc1 | •OH | 1.70 × 10^9 | 9.23 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Acetaminophen",
+          "compound_class": "Phenols",
+          "inchikey": "RZVAJINKPMORJF-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(=O)Nc1ccc(O)cc1",
+          "oxidant": "•OH",
+          "standardized_k": 1700000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.38,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Bisphenol A",
+          "compound_class": "Phenols",
+          "oxidant": "•OH",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Pentavalent/hexavalent central carbon CC(=O)(=O)(c1...)c1...",
+          "raw_reported_k": 10200000000.0,
+          "reported_log10_k": 10.01
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_004",
+      "source_citation": "Huber et al. (2003) Environ. Sci. Technol. 37, 1016-1024",
+      "format_type": "latex_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Second-order rate constants for sulfonamide antibiotics in phosphate buffer (pH = 7.0, T = 293.15 K).\n\\begin{tabular}{l l c c c c}\n\\hline\nCompound & SMILES & Oxidant & $k$ ($\\mathrm{L\\cdot mol^{-1}\\cdot s^{-1}}$) & $\\log k$ & pH \\\\\n\\hline\nSulfamethoxazole & Cc1cc(NS(=O)(=O)c2ccc(N)cc2)no1 & O3 & $5.5 \\cdot 10^{5}$ & 5.74 & 7.0 \\\\\nSulfadiazine & Nc1ccc(S(=O)(=O)Nc2ncccn2)cc1 & •OH & $5.3 \\cdot 10^{9}$ & 9.72 & 7.0 \\\\\n\\hline\n\\end{tabular}\n",
+      "gold_records": [
+        {
+          "compound_name": "Sulfamethoxazole",
+          "compound_class": "Sulfonamides",
+          "inchikey": "JLKIGFTWXXRPMT-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1cc(NS(=O)(=O)c2ccc(N)cc2)no1",
+          "oxidant": "O3",
+          "standardized_k": 550000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 5.7,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Sulfadiazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "SEEPANYCNGTZFQ-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccc(S(=O)(=O)Nc2ncccn2)cc1",
+          "oxidant": "•OH",
+          "standardized_k": 5300000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 6.48,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_005",
+      "source_citation": "Boreen et al. (2004) Environ. Sci. Technol. (footnote unit trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Ozonation kinetics of veterinary sulfonamides in carbonate-free buffer at pH = 7.5 and 20 °C.\n\n| Compound | Oxidant | k_O3^a | log k (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Sulfamethazine | O3 | 6.2 × 10^2^a | 5.79 | 7.5 | 20.0 |\n| Sulfapyridine | O3 | 1.8 × 10^2^a | 5.26 | 7.5 | 20.0 |\n\n^a Apparent second-order rate constants reported in mM^-1 s^-1.\nIn prose, Sulfamethazine reacted with ozone at 6.2 × 10^2 mM^-1 s^-1, and Sulfapyridine at 1.8 × 10^2 mM^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Sulfamethazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "ASWVTGNCAZCNNR-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1cc(C)nc(NS(=O)(=O)c2ccc(N)cc2)n1",
+          "oxidant": "O3",
+          "standardized_k": 620000.0,
+          "inequality": null,
+          "ph": 7.5,
+          "pka": 7.4,
+          "temperature_c": 20.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        },
+        {
+          "compound_name": "Sulfapyridine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "GECHUMIMRBOMGK-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccc(S(=O)(=O)Nc2ccccn2)cc1",
+          "oxidant": "O3",
+          "standardized_k": 180000.0,
+          "inequality": null,
+          "ph": 7.5,
+          "pka": 8.43,
+          "temperature_c": 20.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_006",
+      "source_citation": "Mahdi Ahmed et al. (2012) J. Hazard. Mater. (broken ring OCSR trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Sulfate radical oxidation in ultrapure water at pH = 7.0 and 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sulfamethoxazole | Cc1cc(NS(=O)(=O)c2ccc(N)cc2)no | SO4•- | 2.9 × 10^9 | 9.46 | 7.0 | 25.0 |\n| Sulfachloropyridazine | Nc1ccc(S(=O)(=O)Nc2ccc(Cl)nn2)cc1 | SO4•- | 3.4 × 10^9 | 9.53 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Sulfachloropyridazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "XOXHILFPRYWFOD-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccc(S(=O)(=O)Nc2ccc(Cl)nn2)cc1",
+          "oxidant": "SO4•-",
+          "standardized_k": 3400000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 5.9,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Sulfamethoxazole",
+          "compound_class": "Sulfonamides",
+          "oxidant": "SO4•-",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Unclosed ring index '1' in truncated SMILES Cc1cc(...)no",
+          "raw_reported_k": 2900000000.0,
+          "reported_log10_k": 9.46
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_007",
+      "source_citation": "Benner et al. (2008) Environ. Sci. Technol. 42, 5417 (OCR scan excerpt)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Kinetics of beta-blockers with ozone and hydroxyl radicals in phosphate buffer at pH = 7.0, T = 20 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | log k | pH | pKa |\n| --- | --- | --- | --- | --- | --- |\n| Propranolol | O3 | (1.0 ± 0.1) × l0^5 | 5.00 | 7.0 | 9.45 |\n| Metoprolol | O3 | 2.0 × 1O^3 | 3.30 | 7.0 | 9.68 |\n| Atenolol | •OH | 8.0 × 10⁹ M⁻¹ s⁻¹ | 9.90 | 7.0 | 9.60 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Propranolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "AQHHHDLHHXJYJD-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
+          "oxidant": "O3",
+          "standardized_k": 100000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.45,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_GLYPH_BASE10"
+        },
+        {
+          "compound_name": "Metoprolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "IUBSYMUCCVWXPE-UHFFFAOYSA-N",
+          "canonical_smiles": "COCCc1ccc(OCC(O)CNC(C)C)cc1",
+          "oxidant": "O3",
+          "standardized_k": 2000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.68,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_GLYPH_BASE10"
+        },
+        {
+          "compound_name": "Atenolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "METKIMKYRPQLGS-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COc1ccc(CC(N)=O)cc1",
+          "oxidant": "•OH",
+          "standardized_k": 8000000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.6,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_008",
+      "source_citation": "Lee et al. (2014) Water Res. (OCR 100x exponent misread in table)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Direct ozonation of beta-blockers at pH = 7.0 (phosphate buffer) and 20 °C with tert-butanol.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sotalol | CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1 | O3 | 1.9 × 10^2 | 4.28 | 7.0 | 20.0 |\n| Nadolol | CC(C)(C)NCC(O)COc1cccc2c1CC(O)C(O)C2 | O3 | 3.5 × 10^3 | 3.54 | 7.0 | 20.0 |\n\nSotalol displayed high ozone reactivity due to its sulfonanilide moiety, with k_O3 = 1.9 × 10^4 M^-1 s^-1 (log k = 4.28) at pH 7.0.",
+      "gold_records": [
+        {
+          "compound_name": "Sotalol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "ZBMZVLHSJCTVON-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 19000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 8.3,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Nadolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "VWPOSFSPZNDTMJ-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)(C)NCC(O)COc1cccc2c1CC(O)C(O)C2",
+          "oxidant": "O3",
+          "standardized_k": 3500.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.67,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_009",
+      "source_citation": "Song et al. (2008) J. Phys. Chem. A (OCR diffusion-limit violation trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Pulse radiolysis measurements of hydroxyl radical rate constants at pH = 7.0 and 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Acebutolol | CCCC(=O)Nc1ccc(OCC(O)CNC(C)C)c(C(C)=O)c1 | •OH | 4.6 × 10^9 | 9.66 | 7.0 | 25.0 |\n| Bisoprolol | CC(C)OCCOc1ccc(COCC(O)CNC(C)C)cc1 | •OH | 8.4 × 10^11 | 11.92 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Acebutolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "GOEMGAFJFRBGGG-UHFFFAOYSA-N",
+          "canonical_smiles": "CCCC(=O)Nc1ccc(OCC(O)CNC(C)C)c(C(C)=O)c1",
+          "oxidant": "•OH",
+          "standardized_k": 4600000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.2,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Bisoprolol",
+          "compound_class": "Beta-blockers",
+          "oxidant": "•OH",
+          "trap_type": "DIFFUSION_LIMIT_VIOLATION",
+          "description": "k = 8.4e11 M^-1 s^-1 exceeds Smoluchowski aqueous limit 2.5e10 M^-1 s^-1",
+          "raw_reported_k": 840000000000.0,
+          "reported_log10_k": 11.92
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_010",
+      "source_citation": "Acero et al. (2000) Environ. Sci. Technol. 34, 591-597",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Oxidation of chloro-s-triazine herbicides in phosphate buffer (pH = 7.0, T = 20 °C).\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Atrazine | CCNc1nc(NC(C)C)nc(Cl)n1 | O3 | 6.0 ± 0.4 | 0.78 | 7.0 | 20.0 |\n| Atrazine | CCNc1nc(NC(C)C)nc(Cl)n1 | •OH | 3.0 × 10^9 | 9.48 | 7.0 | 20.0 |\n| Simazine | CCNc1nc(NCC)nc(Cl)n1 | O3 | 4.8 ± 0.3 | 0.68 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Atrazine",
+          "compound_class": "Triazines",
+          "inchikey": "MXWJVTOOROXGIU-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NC(C)C)n1",
+          "oxidant": "O3",
+          "standardized_k": 6.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.7,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Atrazine",
+          "compound_class": "Triazines",
+          "inchikey": "MXWJVTOOROXGIU-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NC(C)C)n1",
+          "oxidant": "•OH",
+          "standardized_k": 3000000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.7,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Simazine",
+          "compound_class": "Triazines",
+          "inchikey": "ODCWYMIRDDJXKW-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NCC)n1",
+          "oxidant": "O3",
+          "standardized_k": 4.8,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.62,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_011",
+      "source_citation": "Beltran et al. (1994) Ozone Sci. Eng. (minute time-base table)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Direct ozonation rate constants of s-triazines in phosphate buffer at pH = 7.0 and 20 °C.\n\n| Compound | Oxidant | k (M^-1 min^-1) | log k (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Propazine | O3 | 420 | 0.85 | 7.0 | 20.0 |\n| Cyanazine | O3 | 90 | 0.18 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Propazine",
+          "compound_class": "Triazines",
+          "inchikey": "WJNRPILHGGKWCK-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)Nc1nc(Cl)nc(NC(C)C)n1",
+          "oxidant": "O3",
+          "standardized_k": 7.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.7,
+          "temperature_c": 20.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        },
+        {
+          "compound_name": "Cyanazine",
+          "compound_class": "Triazines",
+          "inchikey": "MZZBPDKVEFVLFF-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NC(C)(C)C#N)n1",
+          "oxidant": "O3",
+          "standardized_k": 1.5,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.1,
+          "temperature_c": 20.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_012",
+      "source_citation": "Lutze et al. (2015) Water Res. (pseudo-first-order k_obs trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Sulfate radical degradation of methylthio-triazines at pH = 7.0 and 25 °C.\n\n| Compound | Oxidant | k | pH | T (°C) |\n| --- | --- | --- | --- | --- |\n| Prometryn | SO4•- | 4.2 × 10^9 M^-1 s^-1 | 7.0 | 25.0 |\n| Terbutryn | SO4•- | 0.085 min^-1 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Prometryn",
+          "compound_class": "Triazines",
+          "inchikey": "AAEVYOVXGOFMJO-UHFFFAOYSA-N",
+          "canonical_smiles": "CSc1nc(NC(C)C)nc(NC(C)C)n1",
+          "oxidant": "SO4•-",
+          "standardized_k": 4200000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.05,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Terbutryn",
+          "compound_class": "Triazines",
+          "oxidant": "SO4•-",
+          "trap_type": "PSEUDO_FIRST_ORDER_TRAP",
+          "description": "Reported pseudo-first-order k_obs in min^-1 without radical concentration",
+          "raw_reported_k": 0.085,
+          "reported_log10_k": null
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_013",
+      "source_citation": "Hoigne & Bader (1983); Huber et al. (2003) (olefin reactivity span)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Reactivity of activated vs chlorinated ethylenic double bonds toward ozone at pH = 7.0, 20 °C.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Carbamazepine | NC(=O)N1c2ccccc2C=Cc2ccccc21 | O3 | (3.0 ± 0.2) × 10^5 | 7.0 | 20.0 |\n| Trichloroethylene | ClC=C(Cl)Cl | O3 | 17 ± 2 | 7.0 | 20.0 |\n| Tetrachloroethylene | ClC(Cl)=C(Cl)Cl | O3 | < 0.1 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Carbamazepine",
+          "compound_class": "Olefins",
+          "inchikey": "FFGPTBGBLSHEPO-UHFFFAOYSA-N",
+          "canonical_smiles": "NC(=O)N1c2ccccc2C=Cc2ccccc21",
+          "oxidant": "O3",
+          "standardized_k": 300000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Trichloroethylene",
+          "compound_class": "Olefins",
+          "inchikey": "XSTXAVWGXDQKEL-UHFFFAOYSA-N",
+          "canonical_smiles": "ClC=C(Cl)Cl",
+          "oxidant": "O3",
+          "standardized_k": 17.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Tetrachloroethylene",
+          "compound_class": "Olefins",
+          "inchikey": "CYTYCFOTNPOANT-UHFFFAOYSA-N",
+          "canonical_smiles": "ClC(Cl)=C(Cl)Cl",
+          "oxidant": "O3",
+          "standardized_k": 0.1,
+          "inequality": "<",
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_014",
+      "source_citation": "Leitzke et al. (2001) J. Chem. Soc. Perkin Trans. 2 (prose-only excerpt)",
+      "format_type": "prose_only",
+      "primary_family": "Olefins",
+      "text": "Stopped-flow spectrophotometric measurements were carried out in 20 mM phosphate buffer at pH = 7.0 and T = 298.15 K with tert-butanol scavenger. Styrene reacted rapidly with aqueous ozone with k_O3 = (3.0 ± 0.3) × 10^5 M^-1 s^-1 (log k = 5.48). Under identical conditions, Acrolein exhibited a second-order rate constant of k_O3 = 2.8 × 10^4 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Styrene",
+          "compound_class": "Olefins",
+          "inchikey": "PPBRXRYQALVLMV-UHFFFAOYSA-N",
+          "canonical_smiles": "C=Cc1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 300000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Acrolein",
+          "compound_class": "Olefins",
+          "inchikey": "HGINCPLSRVDWNT-UHFFFAOYSA-N",
+          "canonical_smiles": "C=CC=O",
+          "oxidant": "O3",
+          "standardized_k": 28000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_015",
+      "source_citation": "Dowideit & von Sonntag (1998) Environ. Sci. Technol. (OCR negative Kelvin trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Ozonation of unsaturated carboxylic acids and chloroethenes in phosphate buffer at pH = 7.0.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T |\n| --- | --- | --- | --- | --- | --- | --- |\n| trans-Cinnamic acid | O=C(O)/C=C/c1ccccc1 | O3 | 3.8 × 10^5 | 5.58 | 7.0 | 293.15 K |\n| cis-1,2-Dichloroethylene | Cl/C=C\\Cl | O3 | 8.0 × 10^2 | 2.90 | 7.0 | -20 K |\n",
+      "gold_records": [
+        {
+          "compound_name": "trans-Cinnamic acid",
+          "compound_class": "Olefins",
+          "inchikey": "WBYWAXJHAXSJNI-VOTSOKGWSA-N",
+          "canonical_smiles": "O=C(O)/C=C/c1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 380000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.44,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "cis-1,2-Dichloroethylene",
+          "compound_class": "Olefins",
+          "oxidant": "O3",
+          "trap_type": "NEGATIVE_KELVIN_VIOLATION",
+          "description": "Thermodynamically impossible temperature T = -20 K (-293.15 °C)",
+          "raw_reported_k": 800.0,
+          "reported_log10_k": 2.9
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_016",
+      "source_citation": "Lee & von Gunten (2010) Water Res. 44, 555-566 (amine speciation)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Ozonation of aliphatic amines in phosphate buffer at pH = 7.0 and T = 20 °C.\n\n| Compound | SMILES | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| Trimethylamine | CN(C)C | O3 | 6.49 × 10^3 | 3.81 | 7.0 | 9.80 | 0.05 | 4.1 × 10^6 |\n| Dimethylamine | CNC | O3 | 3.53 × 10^3 | 3.55 | 7.0 | 10.73 | 0.01 | 1.9 × 10^7 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Trimethylamine",
+          "compound_class": "Amines",
+          "inchikey": "GETQZCLCWQTVFV-UHFFFAOYSA-N",
+          "canonical_smiles": "CN(C)C",
+          "oxidant": "O3",
+          "standardized_k": 6490.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.8,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Dimethylamine",
+          "compound_class": "Amines",
+          "inchikey": "ROSDSFDQCJNGOL-UHFFFAOYSA-N",
+          "canonical_smiles": "CNC",
+          "oxidant": "O3",
+          "standardized_k": 3530.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.73,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_017",
+      "source_citation": "Dodd et al. (2006) Environ. Sci. Technol. 40, 1969 (pentavalent N trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Apparent ozonation rate constants of amine-bearing pharmaceuticals at pH = 7.0, 20 °C.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Triethylamine | CCN(CC)(CC)(=O)C | O3 | 3.7 × 10^2 | 2.57 | 7.0 | 20.0 |\n| Diclofenac | O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl | O3 | 1.0 × 10^6 | 6.00 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Diclofenac",
+          "compound_class": "Amines",
+          "inchikey": "DCOPUUMXTXDBNB-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl",
+          "oxidant": "O3",
+          "standardized_k": 1000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.15,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Triethylamine",
+          "compound_class": "Amines",
+          "oxidant": "O3",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Pentavalent neutral nitrogen CCN(CC)(CC)(=O)C rejected by RDKit valence check",
+          "raw_reported_k": 370.0,
+          "reported_log10_k": 2.57
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_018",
+      "source_citation": "Dodd et al. (2006) Environ. Sci. Technol. (hybrid table + prose supplement)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Fluoroquinolone and diaminopyrimidine antibiotics were ozonated at pH = 7.0 (phosphate buffer, 20 °C).\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Ciprofloxacin | O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O | O3 | 1.9 × 10^4 | 4.28 | 7.0 | 20.0 |\n\nIn parallel competition experiments at pH 7.0 and 20 °C, Trimethoprim reacted with ozone with k_O3 = 2.7 × 10^5 M^-1 s^-1 (log k = 5.43).",
+      "gold_records": [
+        {
+          "compound_name": "Ciprofloxacin",
+          "compound_class": "Amines",
+          "inchikey": "MYSWGUAQZAJSOK-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O",
+          "oxidant": "O3",
+          "standardized_k": 19000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 6.09,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Trimethoprim",
+          "compound_class": "Amines",
+          "inchikey": "IEDVJHCEMCRBQM-UHFFFAOYSA-N",
+          "canonical_smiles": "COc1cc(Cc2cnc(N)nc2N)cc(OC)c1OC",
+          "oxidant": "O3",
+          "standardized_k": 270000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 7.12,
+          "temperature_c": 20.0,
+          "failure_category": "HYBRID_PROSE_SUPPLEMENT"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_019",
+      "source_citation": "Synthetic Speciation Violation Stress Test (Phenols)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Acid-base speciation audit of chlorophenols at pH = 6.0 and 20 °C.\n\n| Compound | SMILES | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 2,4-Dichlorophenol | Oc1ccc(Cl)cc1Cl | O3 | 1.02 × 10^7 | 7.01 | 6.0 | 7.89 | 1.5 × 10^3 | 8.0 × 10^8 |\n| 2,4,6-Trichlorophenol | Oc1c(Cl)cc(Cl)cc1Cl | O3 | 5.0 × 10^2 | 2.70 | 6.0 | 6.15 | 1.0 × 10^4 | 5.0 × 10^8 |\n",
+      "gold_records": [
+        {
+          "compound_name": "2,4-Dichlorophenol",
+          "compound_class": "Phenols",
+          "inchikey": "HFZWRUODUSTPEG-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1ccc(Cl)cc1Cl",
+          "oxidant": "O3",
+          "standardized_k": 10200000.0,
+          "inequality": null,
+          "ph": 6.0,
+          "pka": 7.89,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "2,4,6-Trichlorophenol",
+          "compound_class": "Phenols",
+          "oxidant": "O3",
+          "trap_type": "SPECIATION_VIOLATION",
+          "description": "Reported k_app=500 M^-1 s^-1 at pH 6.0 violates k_HA=1e4, k_A-=5e8 (predicted 2.07e8)",
+          "raw_reported_k": 500.0,
+          "reported_log10_k": 2.7
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_020",
+      "source_citation": "Huber et al. (2003) Environ. Sci. Technol. (estrogens LaTeX table)",
+      "format_type": "latex_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Estrogenic micropollutant oxidation in phosphate buffer at pH = 7.0 and T = 293.15 K.\n\\begin{tabular}{l c c c c}\n\\toprule\nCompound & Oxidant & $k$ ($\\mathrm{M^{-1}\\,s^{-1}}$) & $\\log k$ & pH \\\\\n\\midrule\n17alpha-Ethinylestradiol & O3 & $(3.0 \\pm 0.3) \\times 10^{6}$ & 6.48 & 7.0 \\\\\nEstrone & O3 & $1.5 \\times 10^{6}$ & 6.18 & 7.0 \\\\\n17alpha-Ethinylestradiol & •OH & $9.8 \\times 10^{9}$ & 9.99 & 7.0 \\\\\n\\bottomrule\n\\end{tabular}\n",
+      "gold_records": [
+        {
+          "compound_name": "17alpha-Ethinylestradiol",
+          "compound_class": "Phenols",
+          "inchikey": "BFPYWIDHMRZLRN-SLHNCBLASA-N",
+          "canonical_smiles": "C#C[C@]1(O)CC[C@H]2[C@@H]3CCc4cc(O)ccc4[C@H]3CC[C@@]21C",
+          "oxidant": "O3",
+          "standardized_k": 3000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.4,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Estrone",
+          "compound_class": "Phenols",
+          "inchikey": "DNXHEGUUPJUMQT-CBZIJGRNSA-N",
+          "canonical_smiles": "C[C@]12CC[C@@H]3c4ccc(O)cc4CC[C@H]3[C@@H]1CCC2=O",
+          "oxidant": "O3",
+          "standardized_k": 1500000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.34,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "17alpha-Ethinylestradiol",
+          "compound_class": "Phenols",
+          "inchikey": "BFPYWIDHMRZLRN-SLHNCBLASA-N",
+          "canonical_smiles": "C#C[C@]1(O)CC[C@H]2[C@@H]3CCc4cc(O)ccc4[C@H]3CC[C@@]21C",
+          "oxidant": "•OH",
+          "standardized_k": 9800000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.4,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_021",
+      "source_citation": "Dodd et al. (2006) (transposed pH/pKa table columns)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Apparent ozonation rate constants measured in pH = 7.0 phosphate buffer at 20 °C.\n\n| Compound | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Sulfamethoxazole | O3 | 5.45 × 10^5 | 5.74 | 5.70 | 7.00 | 4.7 × 10^4 | 5.7 × 10^5 |\n\nAt pH = 7.0, Sulfamethoxazole (pKa = 5.70) is predominantly anionic, yielding k_O3 = 5.45 × 10^5 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Sulfamethoxazole",
+          "compound_class": "Sulfonamides",
+          "inchikey": "JLKIGFTWXXRPMT-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1cc(NS(=O)(=O)c2ccc(N)cc2)no1",
+          "oxidant": "O3",
+          "standardized_k": 545000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 5.7,
+          "temperature_c": 20.0,
+          "failure_category": "PH_PKA_SWAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_022",
+      "source_citation": "Boreen et al. (2005) (LLM SMILES skeleton swap trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Hydroxyl radical reaction rates in phosphate buffer at pH = 7.0, 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sulfathiazole | c1ccccc1 | •OH | 6.1 × 10^9 | 9.79 | 7.0 | 25.0 |\n| Sulfamerazine | Cc1ccnc(NS(=O)(=O)c2ccc(N)cc2)n1 | •OH | 5.8 × 10^9 | 9.76 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Sulfamerazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "QPPBRPIAZZHUNT-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1ccnc(NS(=O)(=O)c2ccc(N)cc2)n1",
+          "oxidant": "•OH",
+          "standardized_k": 5800000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 6.98,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Sulfathiazole",
+          "compound_class": "Sulfonamides",
+          "oxidant": "•OH",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "LLM assigned benzene SMILES (c1ccccc1) to Sulfathiazole (InChIKey skeleton mismatch)",
+          "raw_reported_k": 6100000000.0,
+          "reported_log10_k": 9.79
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_023",
+      "source_citation": "Buxton et al. (1988) J. Phys. Chem. Ref. Data (molecular unit convention)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Compiled hydroxyl radical rate constants converted from molecular units at pH = 7.0 and 25 °C.\n\n| Compound | Oxidant | k (cm^3 molecule^-1 s^-1) | log k (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Desethylatrazine | •OH | 1.99 × 10^-12 | 9.08 | 7.0 | 25.0 |\n| Simazine | •OH | 4.65 × 10^-12 | 9.45 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Desethylatrazine",
+          "compound_class": "Triazines",
+          "inchikey": "DFWFIQKMSFGDCQ-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)Nc1nc(N)nc(Cl)n1",
+          "oxidant": "•OH",
+          "standardized_k": 1198400000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.5,
+          "temperature_c": 25.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        },
+        {
+          "compound_name": "Simazine",
+          "compound_class": "Triazines",
+          "inchikey": "ODCWYMIRDDJXKW-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NCC)n1",
+          "oxidant": "•OH",
+          "standardized_k": 2800300000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.62,
+          "temperature_c": 25.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_024",
+      "source_citation": "Neta et al. (1988) J. Phys. Chem. Ref. Data (OCR 10^6 vs 10^9 table misread)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Sulfate radical oxidation of substituted phenols at pH = 7.0 and 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| p-Cresol | Cc1ccc(O)cc1 | SO4•- | 4.2 × 10^6 | 9.62 | 7.0 | 25.0 |\n| Guaiacol | COc1ccccc1O | SO4•- | 5.1 × 10^9 | 9.71 | 7.0 | 25.0 |\n\nLaser flash photolysis confirmed diffusion-approaching electron transfer for p-Cresol with k_{SO4•-} = 4.2 × 10^9 M^-1 s^-1 (log k = 9.62).",
+      "gold_records": [
+        {
+          "compound_name": "p-Cresol",
+          "compound_class": "Phenols",
+          "inchikey": "IWDCLRJOBJJRNH-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1ccc(O)cc1",
+          "oxidant": "SO4•-",
+          "standardized_k": 4200000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.26,
+          "temperature_c": 25.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Guaiacol",
+          "compound_class": "Phenols",
+          "inchikey": "LHGVFZTZFXWLCP-UHFFFAOYSA-N",
+          "canonical_smiles": "COc1ccccc1O",
+          "oxidant": "SO4•-",
+          "standardized_k": 5100000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.98,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_025",
+      "source_citation": "Corrupted OCSR Table Benchmark (Olefins log-k contradiction)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Ozonation and radical oxidation of food preservatives and aromatics at pH = 7.0, 20 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sorbic acid | CC=CC=CC(=O)O | O3 | 1.2 × 10^6 | 6.08 | 7.0 | 20.0 |\n| Nitrobenzene | O=[N+]([O-])c1ccccc1 | O3 | 9.4 × 10^4 | 0.95 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Sorbic acid",
+          "compound_class": "Olefins",
+          "inchikey": "WSWCOQWTEOXDQX-UHFFFAOYSA-N",
+          "canonical_smiles": "CC=CC=CC(=O)O",
+          "oxidant": "O3",
+          "standardized_k": 1200000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.76,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Nitrobenzene",
+          "compound_class": "Olefins",
+          "oxidant": "O3",
+          "trap_type": "UNRECOVERABLE_LOG_K_MISMATCH",
+          "description": "k=9.4e4 (log10=4.97) contradicts reported log k=0.95 (true Nitrobenzene k_O3=0.09) with no prose resolution",
+          "raw_reported_k": 94000.0,
+          "reported_log10_k": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_026",
+      "source_citation": "Wols & Hofman-Caris (2012) Water Res. (prose kinetics)",
+      "format_type": "prose_only",
+      "primary_family": "Amines",
+      "text": "Competition kinetics in phosphate buffer at pH = 7.0 and 25 °C established the radical reactivity of antihistamines and anilines. Diphenhydramine reacted rapidly with hydroxyl radicals with k_{•OH} = 5.4 × 10^9 M^-1 s^-1 (log k = 9.73). Aniline reacted with ozone at pH 7.0 with k_O3 = 9.0 × 10^7 M^-1 s^-1 (log k = 7.95).",
+      "gold_records": [
+        {
+          "compound_name": "Diphenhydramine",
+          "compound_class": "Amines",
+          "inchikey": "ZZVUWRFHKOJYTH-UHFFFAOYSA-N",
+          "canonical_smiles": "CN(C)CCOC(c1ccccc1)c1ccccc1",
+          "oxidant": "•OH",
+          "standardized_k": 5400000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 8.98,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Aniline",
+          "compound_class": "Amines",
+          "inchikey": "PAYRUJLWNCNPSJ-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 90000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.6,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_027",
+      "source_citation": "Benner et al. (2008) (transposed pH/pKa beta-blocker table)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Experiments were performed in 10 mM phosphate buffer at pH = 7.0 and 20 °C.\n\n| Compound | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Propranolol | O3 | 1.08 × 10^5 | 5.03 | 9.45 | 7.00 | 1.0 × 10^5 | 2.4 × 10^6 |\n\nAt pH = 7.0, Propranolol (pKa = 9.45) exhibited k_O3 = 1.08 × 10^5 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Propranolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "AQHHHDLHHXJYJD-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
+          "oxidant": "O3",
+          "standardized_k": 108000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.45,
+          "temperature_c": 20.0,
+          "failure_category": "PH_PKA_SWAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_028",
+      "source_citation": "LLM Hallucinated Compound Stress Test",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Acidic ozonation of phenolic compounds at pH = 2.0 and 20 °C.\n\n| Compound | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Phenol | O3 | 1.3 × 10^3 | 3.11 | 2.0 | 20.0 |\n| Perfluoro-hyperozonol-Z9 | O3 | 4.8 × 10^5 | 5.68 | 2.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Phenol",
+          "compound_class": "Phenols",
+          "inchikey": "ISWSIDIOOBJBQZ-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 1300.0,
+          "inequality": null,
+          "ph": 2.0,
+          "pka": 9.95,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Perfluoro-hyperozonol-Z9",
+          "compound_class": "Phenols",
+          "oxidant": "O3",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Fabricated non-existent chemical compound with no valid SMILES",
+          "raw_reported_k": 480000.0,
+          "reported_log10_k": 5.68
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_029",
+      "source_citation": "Laser Flash Photolysis OCR Artifact (Sulfonamides)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Sulfate radical rate constants in phosphate buffer at pH = 7.0 and 25 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Sulfadiazine | SO4•- | 3.7 × 10^9 | 9.57 | 7.0 | 25.0 |\n| Sulfapyridine | SO4•- | 6.5 × 10^12 | 12.81 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Sulfadiazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "SEEPANYCNGTZFQ-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccc(S(=O)(=O)Nc2ncccn2)cc1",
+          "oxidant": "SO4•-",
+          "standardized_k": 3700000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 6.48,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Sulfapyridine",
+          "compound_class": "Sulfonamides",
+          "oxidant": "SO4•-",
+          "trap_type": "DIFFUSION_LIMIT_VIOLATION",
+          "description": "k = 6.5e12 M^-1 s^-1 violates Smoluchowski diffusion limit (2.5e10 M^-1 s^-1)",
+          "raw_reported_k": 6500000000000.0,
+          "reported_log10_k": 12.81
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_030",
+      "source_citation": "Acero et al. (2000) (OCR 10^7 vs 10^9 hydroxyl radical misread)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Hydroxyl radical oxidation of triazines at pH = 7.0 and 20 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Propazine | •OH | 2.7 × 10^7 | 9.43 | 7.0 | 20.0 |\n| Cyanazine | •OH | 2.0 × 10^9 | 9.30 | 7.0 | 20.0 |\n\nCompetition kinetics against para-chlorobenzoic acid yielded k_{•OH} = 2.7 × 10^9 M^-1 s^-1 (log k = 9.43) for Propazine.",
+      "gold_records": [
+        {
+          "compound_name": "Propazine",
+          "compound_class": "Triazines",
+          "inchikey": "WJNRPILHGGKWCK-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)Nc1nc(Cl)nc(NC(C)C)n1",
+          "oxidant": "•OH",
+          "standardized_k": 2700000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.7,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Cyanazine",
+          "compound_class": "Triazines",
+          "inchikey": "MZZBPDKVEFVLFF-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NC(C)(C)C#N)n1",
+          "oxidant": "•OH",
+          "standardized_k": 2000000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.1,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_031",
+      "source_citation": "Hoigne & Bader (1983) (electron-withdrawing phenols LaTeX table)",
+      "format_type": "latex_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Ozonation of nitro- and polychloro-phenols at pH = 2.0 and pH = 7.0 (T = 293.15 K).\n\\begin{tabular}{l c c c c}\n\\hline\nCompound & Oxidant & $k$ ($\\mathrm{M^{-1}\\,s^{-1}}$) & $\\log k$ & pH \\\\\n\\hline\n4-Nitrophenol & O3 & $50$ & 1.70 & 2.0 \\\\\nPentachlorophenol & O3 & $3.1 \\times 10^{7}$ & 7.49 & 7.0 \\\\\n\\hline\n\\end{tabular}\n",
+      "gold_records": [
+        {
+          "compound_name": "4-Nitrophenol",
+          "compound_class": "Phenols",
+          "inchikey": "BTJIUGUIPKRLHP-UHFFFAOYSA-N",
+          "canonical_smiles": "O=[N+]([O-])c1ccc(O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 50.0,
+          "inequality": null,
+          "ph": 2.0,
+          "pka": 7.15,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Pentachlorophenol",
+          "compound_class": "Phenols",
+          "inchikey": "IZUPBVBPLAPZRR-UHFFFAOYSA-N",
+          "canonical_smiles": "Oc1c(Cl)c(Cl)c(Cl)c(Cl)c1Cl",
+          "oxidant": "O3",
+          "standardized_k": 31000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.7,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_032",
+      "source_citation": "Lee et al. (2007) Environ. Sci. Technol. 41, 2056 (footnote mM^-1 s^-1)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Hydroxyl radical oxidation of nitrosamines and tertiary amines at pH = 7.0, 25 °C.\n\n| Compound | Oxidant | k* | log k (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| N-Nitrosodimethylamine | •OH | 4.3 × 10^5* | 8.63 | 7.0 | 25.0 |\n| Triethylamine | •OH | 5.1 × 10^6* | 9.71 | 7.0 | 25.0 |\n\n* Rate constants expressed in mM^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "N-Nitrosodimethylamine",
+          "compound_class": "Amines",
+          "inchikey": "UMFJAHHVKNCGLG-UHFFFAOYSA-N",
+          "canonical_smiles": "CN(C)N=O",
+          "oxidant": "•OH",
+          "standardized_k": 430000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        },
+        {
+          "compound_name": "Triethylamine",
+          "compound_class": "Amines",
+          "inchikey": "ZMANZCXQSJIPKH-UHFFFAOYSA-N",
+          "canonical_smiles": "CCN(CC)CC",
+          "oxidant": "•OH",
+          "standardized_k": 5100000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.75,
+          "temperature_c": 25.0,
+          "failure_category": "UNIT_TRAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_033",
+      "source_citation": "Matta et al. (2011); Huber et al. (2003) (Carbamazepine AOP kinetics)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Radical oxidation of Carbamazepine in phosphate buffer at pH = 7.0 and 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Carbamazepine | NC(=O)N1c2ccccc2C=Cc2ccccc21 | •OH | (8.8 ± 1.2) × 10^9 | 9.94 | 7.0 | 25.0 |\n| Carbamazepine | NC(=O)N1c2ccccc2C=Cc2ccccc21 | SO4•- | (1.9 ± 0.2) × 10^9 | 9.28 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Carbamazepine",
+          "compound_class": "Olefins",
+          "inchikey": "FFGPTBGBLSHEPO-UHFFFAOYSA-N",
+          "canonical_smiles": "NC(=O)N1c2ccccc2C=Cc2ccccc21",
+          "oxidant": "•OH",
+          "standardized_k": 8800000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Carbamazepine",
+          "compound_class": "Olefins",
+          "inchikey": "FFGPTBGBLSHEPO-UHFFFAOYSA-N",
+          "canonical_smiles": "NC(=O)N1c2ccccc2C=Cc2ccccc21",
+          "oxidant": "SO4•-",
+          "standardized_k": 1900000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_034",
+      "source_citation": "Beta-blocker Speciation Audit Stress Test",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Apparent ozonation rate constants of alkanolamine beta-blockers at pH = 7.0 and 20 °C.\n\n| Compound | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Atenolol | O3 | 1.7 × 10^3 | 3.23 | 7.0 | 9.60 | 1.1 × 10^2 | 6.3 × 10^5 |\n| Metoprolol | O3 | 9.5 × 10^6 | 6.98 | 7.0 | 9.68 | 3.3 × 10^2 | 8.1 × 10^5 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Atenolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "METKIMKYRPQLGS-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COc1ccc(CC(N)=O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 1700.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.6,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Metoprolol",
+          "compound_class": "Beta-blockers",
+          "oxidant": "O3",
+          "trap_type": "SPECIATION_VIOLATION",
+          "description": "Reported k_app=9.5e6 M^-1 s^-1 exceeds even intrinsic k_A-=8.1e5 (predicted 2.02e3 at pH 7.0)",
+          "raw_reported_k": 9500000.0,
+          "reported_log10_k": 6.98
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_035",
+      "source_citation": "Packer et al. (2003); Huber et al. (2003) (Ibuprofen & Benzoic acid)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Ozonation and hydroxyl radical probe kinetics at pH = 7.0 and 20 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Ibuprofen | O3 | 9.6 ± 1.0 | 0.98 | 7.0 | 20.0 |\n| Ibuprofen | •OH | 7.4 × l0^9 | 9.87 | 7.0 | 20.0 |\n| Benzoic acid | O3 | 1.2 ± 0.2 | 0.08 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Ibuprofen",
+          "compound_class": "Phenols",
+          "inchikey": "HEFNNWSXXWATRW-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 9.6,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.91,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Ibuprofen",
+          "compound_class": "Phenols",
+          "inchikey": "HEFNNWSXXWATRW-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)Cc1ccc(C(C)C(=O)O)cc1",
+          "oxidant": "•OH",
+          "standardized_k": 7400000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.91,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_GLYPH_BASE10"
+        },
+        {
+          "compound_name": "Benzoic acid",
+          "compound_class": "Phenols",
+          "inchikey": "WPYMKLBDIGXBTP-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)c1ccccc1",
+          "oxidant": "O3",
+          "standardized_k": 1.2,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.2,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_036",
+      "source_citation": "Triazine OCSR Valence Stress Test",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Ozonation of s-triazines in phosphate buffer at pH = 7.0, 20 °C.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Atrazine | CCNc1nc(NC(C)(C)(C)C)nc(Cl)(Cl)n1 | O3 | 6.0 | 0.78 | 7.0 | 20.0 |\n| Prometryn | CSc1nc(NC(C)C)nc(NC(C)C)n1 | O3 | 5.2 × 10^2 | 2.72 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Prometryn",
+          "compound_class": "Triazines",
+          "inchikey": "AAEVYOVXGOFMJO-UHFFFAOYSA-N",
+          "canonical_smiles": "CSc1nc(NC(C)C)nc(NC(C)C)n1",
+          "oxidant": "O3",
+          "standardized_k": 520.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.05,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Atrazine",
+          "compound_class": "Triazines",
+          "oxidant": "O3",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Pentavalent aromatic carbon nc(Cl)(Cl)n1 in corrupted Atrazine SMILES",
+          "raw_reported_k": 6.0,
+          "reported_log10_k": 0.78
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_037",
+      "source_citation": "Huber et al. (2003) (Diclofenac & Trimethoprim •OH)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Hydroxyl radical competition kinetics in phosphate buffer at pH = 7.0 and 25 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- |\n| Diclofenac | •OH | 7.5 × 10^7 | 9.88 | 7.0 | 25.0 |\n| Trimethoprim | •OH | 6.9 × 10^9 | 9.84 | 7.0 | 25.0 |\n\nDiclofenac reacted near the diffusion-controlled regime with hydroxyl radicals, yielding k_{•OH} = 7.5 × 10^9 M^-1 s^-1 (log k = 9.88).",
+      "gold_records": [
+        {
+          "compound_name": "Diclofenac",
+          "compound_class": "Amines",
+          "inchikey": "DCOPUUMXTXDBNB-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)Cc1ccccc1Nc1c(Cl)cccc1Cl",
+          "oxidant": "•OH",
+          "standardized_k": 7500000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.15,
+          "temperature_c": 25.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Trimethoprim",
+          "compound_class": "Amines",
+          "inchikey": "IEDVJHCEMCRBQM-UHFFFAOYSA-N",
+          "canonical_smiles": "COc1cc(Cc2cnc(N)nc2N)cc(OC)c1OC",
+          "oxidant": "•OH",
+          "standardized_k": 6900000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 7.12,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_038",
+      "source_citation": "Buxton et al. (1988) (chloroethene •OH + s^-1 trap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Hydroxyl radical oxidation of chlorinated ethenes at pH = 7.0 and 25 °C.\n\n| Compound | Oxidant | k | pH | T (°C) |\n| --- | --- | --- | --- | --- |\n| Trichloroethylene | •OH | 4.2 × 10^9 M^-1 s^-1 | 7.0 | 25.0 |\n| Tetrachloroethylene | •OH | 2.6 × 10^9 M^-1 s^-1 | 7.0 | 25.0 |\n| Styrene | •OH | 0.042 s^-1 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Trichloroethylene",
+          "compound_class": "Olefins",
+          "inchikey": "XSTXAVWGXDQKEL-UHFFFAOYSA-N",
+          "canonical_smiles": "ClC=C(Cl)Cl",
+          "oxidant": "•OH",
+          "standardized_k": 4200000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Tetrachloroethylene",
+          "compound_class": "Olefins",
+          "inchikey": "CYTYCFOTNPOANT-UHFFFAOYSA-N",
+          "canonical_smiles": "ClC(Cl)=C(Cl)Cl",
+          "oxidant": "•OH",
+          "standardized_k": 2600000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Styrene",
+          "compound_class": "Olefins",
+          "oxidant": "•OH",
+          "trap_type": "PSEUDO_FIRST_ORDER_TRAP",
+          "description": "Pseudo-first-order decay rate 0.042 s^-1 reported without oxidant concentration",
+          "raw_reported_k": 0.042,
+          "reported_log10_k": null
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_039",
+      "source_citation": "Deborde et al. (2005) Environ. Sci. Technol. 39, 6086",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Apparent ozonation rate constants of alkylphenols and bisphenols at pH = 7.0 (phosphate buffer, 20 °C).\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Bisphenol A | CC(C)(c1ccc(O)cc1)c1ccc(O)cc1 | O3 | 1.68 × 10^6 | 6.23 | 7.0 | 20.0 |\n| 4-Nonylphenol | CCCCCCCCCc1ccc(O)cc1 | O3 | 3.9 × 10^5 | 5.59 | 7.0 | 20.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Bisphenol A",
+          "compound_class": "Phenols",
+          "inchikey": "IISBACLAFKSPIT-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)(c1ccc(O)cc1)c1ccc(O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 1680000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.6,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "4-Nonylphenol",
+          "compound_class": "Phenols",
+          "inchikey": "IGFHQQFPSIBGKE-UHFFFAOYSA-N",
+          "canonical_smiles": "CCCCCCCCCc1ccc(O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 390000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 10.28,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_040",
+      "source_citation": "Mezyk et al. (2007) J. Phys. Chem. A (OCR 10^11 -> 10^9 repair)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Pulse radiolysis determination of hydroxyl radical rate constants at pH = 7.0, 25 °C.\n\n| Compound | Oxidant | k (M^-1 s^-1) | pH | T (°C) |\n| --- | --- | --- | --- | --- |\n| Sulfamethoxazole | •OH | 5.5 × 10^11 | 7.0 | 25.0 |\n| Sulfamethazine | •OH | 5.0 × 10^9 | 7.0 | 25.0 |\n\nTransient absorption growth kinetics yielded k_{•OH} = 5.5 × 10^9 M^-1 s^-1 for Sulfamethoxazole at pH 7.0.",
+      "gold_records": [
+        {
+          "compound_name": "Sulfamethoxazole",
+          "compound_class": "Sulfonamides",
+          "inchikey": "JLKIGFTWXXRPMT-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1cc(NS(=O)(=O)c2ccc(N)cc2)no1",
+          "oxidant": "•OH",
+          "standardized_k": 5500000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 5.7,
+          "temperature_c": 25.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Sulfamethazine",
+          "compound_class": "Sulfonamides",
+          "inchikey": "ASWVTGNCAZCNNR-UHFFFAOYSA-N",
+          "canonical_smiles": "Cc1cc(C)nc(NS(=O)(=O)c2ccc(N)cc2)n1",
+          "oxidant": "•OH",
+          "standardized_k": 5000000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 7.4,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_041",
+      "source_citation": "Hoigne & Bader (1983) (Trimethylamine pH 8.0 vs pKa 9.80 swap)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Amine ozonation in borate-phosphate buffer at pH = 8.0 and 20 °C.\n\n| Compound | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Trimethylamine | O3 | 6.40 × 10^4 | 4.81 | 9.80 | 8.00 | 0.05 | 4.1 × 10^6 |\n\nAt pH = 8.0, Trimethylamine (pKa = 9.80) had an apparent rate constant k_O3 = 6.40 × 10^4 M^-1 s^-1.",
+      "gold_records": [
+        {
+          "compound_name": "Trimethylamine",
+          "compound_class": "Amines",
+          "inchikey": "GETQZCLCWQTVFV-UHFFFAOYSA-N",
+          "canonical_smiles": "CN(C)C",
+          "oxidant": "O3",
+          "standardized_k": 64000.0,
+          "inequality": null,
+          "ph": 8.0,
+          "pka": 9.8,
+          "temperature_c": 20.0,
+          "failure_category": "PH_PKA_SWAP_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_042",
+      "source_citation": "Yang et al. (2017) Water Res. (beta-blocker SO4•- LaTeX table)",
+      "format_type": "latex_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Sulfate radical oxidation of beta-blockers at pH = 7.0 and T = 298.15 K.\n\\begin{tabular}{l c c c c}\n\\hline\nCompound & Oxidant & $k$ ($\\mathrm{M^{-1}\\,s^{-1}}$) & $\\log k$ & pH \\\\\n\\hline\nPropranolol & SO4•- & $4.8 \\times 10^{7}$ & 9.68 & 7.0 \\\\\nMetoprolol & SO4•- & $3.1 \\times 10^{9}$ & 9.49 & 7.0 \\\\\n\\hline\n\\end{tabular}\nPropranolol reacted rapidly with sulfate radicals with k_{SO4•-} = 4.8 × 10^9 M^-1 s^-1 (log k = 9.68) at pH 7.0.",
+      "gold_records": [
+        {
+          "compound_name": "Propranolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "AQHHHDLHHXJYJD-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
+          "oxidant": "SO4•-",
+          "standardized_k": 4800000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.45,
+          "temperature_c": 25.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        },
+        {
+          "compound_name": "Metoprolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "IUBSYMUCCVWXPE-UHFFFAOYSA-N",
+          "canonical_smiles": "COCCc1ccc(OCC(O)CNC(C)C)cc1",
+          "oxidant": "SO4•-",
+          "standardized_k": 3100000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.68,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_043",
+      "source_citation": "Manoj et al. (2007) Chemosphere (triazine SO4•- + broken SMILES)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Triazines",
+      "text": "Sulfate radical rate constants of triazine herbicides at pH = 7.0, 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Atrazine | CCNc1nc(NC(C)C)nc(Cl)n1 | SO4•- | 2.6 × 10^9 | 9.41 | 7.0 | 25.0 |\n| Terbutryn | CCNc1nc(SC)nc(NC(C)(C)C | O3 | 1.1 × 10^3 | 3.04 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Atrazine",
+          "compound_class": "Triazines",
+          "inchikey": "MXWJVTOOROXGIU-UHFFFAOYSA-N",
+          "canonical_smiles": "CCNc1nc(Cl)nc(NC(C)C)n1",
+          "oxidant": "SO4•-",
+          "standardized_k": 2600000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 1.7,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Terbutryn",
+          "compound_class": "Triazines",
+          "oxidant": "O3",
+          "trap_type": "INVALID_VALENCE_HALLUCINATION",
+          "description": "Truncated SMILES with unbalanced parentheses and unclosed ring",
+          "raw_reported_k": 1100.0,
+          "reported_log10_k": 3.04
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_044",
+      "source_citation": "Amine Speciation Physics Audit Excerpt",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Amines",
+      "text": "Aqueous oxidation of aromatic and piperazinyl amines at pH = 7.0, 25 °C.\n\n| Compound | Oxidant | k_app (M^-1 s^-1) | log k | pH | pKa | k_HA (M^-1 s^-1) | k_A- (M^-1 s^-1) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Aniline | O3 | 1.2 × 10^3 | 3.08 | 7.0 | 4.60 | 60 | 9.0 × 10^7 |\n| Ciprofloxacin | •OH | 4.1 × 10^9 | 9.61 | 7.0 | 6.09 | - | - |\n",
+      "gold_records": [
+        {
+          "compound_name": "Ciprofloxacin",
+          "compound_class": "Amines",
+          "inchikey": "MYSWGUAQZAJSOK-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)c1cn(C2CC2)c2cc(N3CCNCC3)c(F)cc2c1=O",
+          "oxidant": "•OH",
+          "standardized_k": 4100000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 6.09,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Aniline",
+          "compound_class": "Amines",
+          "oxidant": "O3",
+          "trap_type": "SPECIATION_VIOLATION",
+          "description": "At pH 7.0 >> pKa 4.60, Aniline is 99.6% neutral B (k_B=9.0e7), so k_app=1.2e3 is physically impossible",
+          "raw_reported_k": 1200.0,
+          "reported_log10_k": 3.08
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_045",
+      "source_citation": "Olefin Radical Diffusion Limit Benchmark",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Olefins",
+      "text": "Hydroxyl radical addition to conjugated double bonds at pH = 7.0, 25 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sorbic acid | CC=CC=CC(=O)O | •OH | 6.8 × 10^9 | 9.83 | 7.0 | 25.0 |\n| Styrene | C=Cc1ccccc1 | •OH | 5.9 × 10^11 | 11.77 | 7.0 | 25.0 |\n",
+      "gold_records": [
+        {
+          "compound_name": "Sorbic acid",
+          "compound_class": "Olefins",
+          "inchikey": "WSWCOQWTEOXDQX-UHFFFAOYSA-N",
+          "canonical_smiles": "CC=CC=CC(=O)O",
+          "oxidant": "•OH",
+          "standardized_k": 6800000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 4.76,
+          "temperature_c": 25.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Styrene",
+          "compound_class": "Olefins",
+          "oxidant": "•OH",
+          "trap_type": "DIFFUSION_LIMIT_VIOLATION",
+          "description": "k = 5.9e11 M^-1 s^-1 exceeds Smoluchowski diffusion limit 2.5e10 M^-1 s^-1",
+          "raw_reported_k": 590000000000.0,
+          "reported_log10_k": 11.77
+        }
+      ]
+    },
+    {
+      "doc_id": "DOC_046",
+      "source_citation": "Real et al. (2009); Hoigne & Bader (1983)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Phenols",
+      "text": "Ozonation of analgesic phenols in phosphate buffer at pH = 7.0 and 20 °C.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Acetaminophen | CC(=O)Nc1ccc(O)cc1 | O3 | 1.4 × 10^6 | 6.15 | 7.0 | 20.0 |\n\nUnder the same pH 7.0 buffer conditions at 20 °C, Salicylic acid reacted more slowly with ozone with k_O3 = 2.8 × 10^4 M^-1 s^-1 (log k = 4.45).",
+      "gold_records": [
+        {
+          "compound_name": "Acetaminophen",
+          "compound_class": "Phenols",
+          "inchikey": "RZVAJINKPMORJF-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(=O)Nc1ccc(O)cc1",
+          "oxidant": "O3",
+          "standardized_k": 1400000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.38,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Salicylic acid",
+          "compound_class": "Phenols",
+          "inchikey": "YGSDEFSMJLZEOE-UHFFFAOYSA-N",
+          "canonical_smiles": "O=C(O)c1ccccc1O",
+          "oxidant": "O3",
+          "standardized_k": 28000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 2.97,
+          "temperature_c": 20.0,
+          "failure_category": "HYBRID_PROSE_SUPPLEMENT"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_047",
+      "source_citation": "Garoma et al. (2010) Ozone Sci. Eng. (Sulfathiazole OCR repair)",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Sulfonamides",
+      "text": "Ozonation of thiazole-ring sulfonamides at pH = 7.0 (phosphate buffer) and 20 °C.\n\n| Compound | SMILES | Oxidant | k_O3 (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Sulfathiazole | Nc1ccc(S(=O)(=O)Nc2nccs2)cc1 | O3 | 1.2 × 10^4 | 6.08 | 7.0 | 20.0 |\n\nSulfathiazole underwent rapid direct ozonation at pH 7.0 with k_O3 = 1.2 × 10^6 M^-1 s^-1 (log k = 6.08).",
+      "gold_records": [
+        {
+          "compound_name": "Sulfathiazole",
+          "compound_class": "Sulfonamides",
+          "inchikey": "JNMRHUJNCSQMMB-UHFFFAOYSA-N",
+          "canonical_smiles": "Nc1ccc(S(=O)(=O)Nc2nccs2)cc1",
+          "oxidant": "O3",
+          "standardized_k": 1200000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 7.2,
+          "temperature_c": 20.0,
+          "failure_category": "OCR_EXPONENT_REPAIRABLE"
+        }
+      ],
+      "injected_traps": []
+    },
+    {
+      "doc_id": "DOC_048",
+      "source_citation": "Lee & von Gunten (2012) Water Res. 46, 6177-6195",
+      "format_type": "markdown_table_and_prose",
+      "primary_family": "Beta-blockers",
+      "text": "Comparative abatement of trace organic contaminants during ozonation at pH = 7.0 and 20 °C.\n\n| Compound | SMILES | Oxidant | k (M^-1 s^-1) | log k | pH | T (°C) |\n| --- | --- | --- | --- | --- | --- | --- |\n| Bisoprolol | CC(C)OCCOc1ccc(COCC(O)CNC(C)C)cc1 | O3 | 2.2 × 10^3 | 3.34 | 7.0 | 20.0 |\n| Nitrobenzene | O=[N+]([O-])c1ccccc1 | •OH | 3.9 × 10^9 | 9.59 | 7.0 | 20.0 |\n| Acrolein | C=CC=O | •OH | 7.0 × 10^9 | 9.85 | 7.0 | 20.0 |\n\nHowever, re-evaluation of Acrolein with hydroxyl radical gave k_{•OH} = 1.9 × 10^8 M^-1 s^-1 under identical pH 7.0 conditions.",
+      "gold_records": [
+        {
+          "compound_name": "Bisoprolol",
+          "compound_class": "Beta-blockers",
+          "inchikey": "KEFDPQZUMQSDQI-UHFFFAOYSA-N",
+          "canonical_smiles": "CC(C)NCC(O)COCc1ccc(OCCOC(C)C)cc1",
+          "oxidant": "O3",
+          "standardized_k": 2200.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": 9.5,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        },
+        {
+          "compound_name": "Nitrobenzene",
+          "compound_class": "Olefins",
+          "inchikey": "LQNUZADURLCDLV-UHFFFAOYSA-N",
+          "canonical_smiles": "O=[N+]([O-])c1ccccc1",
+          "oxidant": "•OH",
+          "standardized_k": 3900000000.0,
+          "inequality": null,
+          "ph": 7.0,
+          "pka": null,
+          "temperature_c": 20.0,
+          "failure_category": "CLEAN_GOLD"
+        }
+      ],
+      "injected_traps": [
+        {
+          "compound_name": "Acrolein",
+          "compound_class": "Olefins",
+          "oxidant": "•OH",
+          "trap_type": "UNRESOLVED_TABLE_PROSE_CONFLICT",
+          "description": "Table states 7.0e9 M^-1 s^-1 while prose contradicts with 1.9e8 M^-1 s^-1",
+          "raw_reported_k": 7000000000.0,
+          "reported_log10_k": 9.85
+        }
+      ]
+    }
+  ]
+}

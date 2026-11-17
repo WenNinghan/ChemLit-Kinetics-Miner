@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chemlit-kinetics-miner"
+version = "0.1.0"
+description = "Evidence-Traceable Scientific Literature Extraction & Cheminformatics/Physics Verification Pipeline for Aqueous Oxidation Kinetics (with MCP Server & CLI)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "WenNinghan" }
+]
+keywords = [
+  "ai4science",
+  "cheminformatics",
+  "environmental-chemistry",
+  "reaction-kinetics",
+  "ozonation",
+  "rdkit",
+  "literature-mining",
+  "mcp-server",
+  "provenance"
+]
+dependencies = [
+  "pydantic>=2.0",
+  "rdkit>=2023.9.1",
+  "numpy>=1.24",
+  "matplotlib>=3.7"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0"
+]
+
+[project.scripts]
+chemlit-miner = "chemlit_miner.cli:main"
+chemlit-mcp = "chemlit_miner.mcp_server:run_mcp_stdio_server"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["chemlit_miner*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra -q"
