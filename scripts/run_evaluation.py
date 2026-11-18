@@ -64,16 +64,16 @@ def record_matches_gold(rec: ReactionKineticsRecord, gold: Dict[str, Any]) -> bo
     if (rec.inequality or None) != (gold.get("inequality") or None):
         return False
 
-    if rec.standardized_k <= 0 or gold["standardized_k"] <= 0:
+    if not (math.isfinite(rec.standardized_k) and rec.standardized_k > 0 and gold["standardized_k"] > 0):
         return False
     if abs(math.log10(rec.standardized_k) - math.log10(gold["standardized_k"])) > 0.05:
         return False
 
     if gold["ph"] is not None:
-        if rec.ph is None or abs(rec.ph - gold["ph"]) > 0.20:
+        if rec.ph is None or not math.isclose(rec.ph, gold["ph"], rel_tol=0, abs_tol=0.20):
             return False
 
-    if abs(rec.temperature_c - gold["temperature_c"]) > 1.0:
+    if not math.isclose(rec.temperature_c, gold["temperature_c"], rel_tol=0, abs_tol=1.0):
         return False
 
     return True
@@ -370,6 +370,7 @@ def main() -> None:
 
     summary_payload = {
         "benchmark_name": corpus["benchmark_name"],
+        "corpus_provenance": corpus.get("provenance"),
         "num_documents": corpus["num_documents"],
         "num_gold_records": corpus["num_gold_records"],
         "num_injected_traps": corpus["num_injected_traps"],

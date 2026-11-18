@@ -29,6 +29,26 @@ from chemlit_miner.parser import (
 class TestScientificParser:
     """Verify scientific notations, OCR glyphs, Kelvin/Celsius, LaTeX, and provenance spans."""
 
+    def test_nonfinite_measurements_do_not_match_gold(self):
+        from scripts.run_evaluation import record_matches_gold
+
+        corpus = json.loads((Path(__file__).parents[1] / "data/benchmark_corpus.json").read_text(encoding="utf-8"))
+        doc = corpus["documents"][0]
+        rec = CrossVerificationEngine(mode="full").run(doc["text"], doc["doc_id"]).accepted_records[0]
+        gold = next(g for g in doc["gold_records"] if record_matches_gold(rec, g))
+        for field in ("ph", "temperature_c", "standardized_k"):
+            assert not record_matches_gold(rec.model_copy(update={field: float("nan")}), gold)
+
+    @pytest.mark.parametrize("quote", ["", "a rate copied from another document"])
+    def test_model_quote_missing_from_source_fails_provenance(self, quote):
+        from scripts.run_live_llm_evaluation import _bind_evidence_span
+
+        text = "Table header\nPhenol reacted with ozone."
+        assert not _bind_evidence_span("D1", text, quote).verify_against_source(text)
+        exact = _bind_evidence_span("D1", text, "Phenol reacted with ozone.")
+        assert exact.verify_against_source(text)
+        assert exact.char_start == text.index("Phenol")
+
     def test_parenthesized_uncertainty_scientific(self) -> None:
         res = parse_scientific_rate_string("(3.2 ± 0.4) × 10^5 M^-1 s^-1")
         assert res is not None

@@ -73,28 +73,47 @@ k_{\text{app}}(\text{pH}) = \alpha_0(\text{pH})\,k_{\text{HA}} + \alpha_1(\text{
 
 ---
 
-## Gold-Standard Benchmark Evaluation
+## Evaluation on constructed excerpts
 
-We evaluate three progressive pipeline configurations on `data/benchmark_corpus.json` (**48 environmental oxidation literature excerpts** across **Phenols, Sulfonamides, Beta-blockers, Triazines, Olefins, and Amines**, comprising **80 gold target records** and **18 injected real-world failure traps**):
+The deterministic parser and audit rules were evaluated on 48 project-authored test excerpts, with 80 target records and 18 injected traps. The builder specifies the tables, prose, corruptions and expected answers. Some source notes cite related literature. The fixtures exercise six chemical families and known failure modes. Performance on independently sampled papers and scans remains unmeasured.
 
-| Pipeline Configuration | Precision | Recall | F1 Score | FP Contamination ↓ | Hallucination & Trap Rejection | Unit & Exponent Catch/Repair | Speciation & pH↔pKa Catch | Provenance + InChIKey Exact |
+| Pipeline Configuration | Precision | Recall | F1 Score | FP Contamination ↓ | Injected traps absent from accepted output | Unit / exponent endpoint met | Speciation / pH endpoint met | Exact text offsets + InChIKey present |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **1. Baseline Single-Pass Extractor** | 58.1% | 67.5% | 62.4% | 41.9% | 0.0% (0/18) | 0.0% | 0.0% | 0.0% |
 | **2. Extractor + RDKit Structure Gate** | 68.5% | 76.2% | 72.2% | 31.5% | 38.9% (7/18)* | 33.3% | 0.0% | 100.0% |
 | **3. `ChemLit-Kinetics-Miner` (Full)** | **97.5%** | **97.5%** | **97.5%** | **2.5%** | **100.0% (18/18)** | **100.0%** | **100.0%** | **100.0%** |
 
-*\*Note: Adding the RDKit gate alone rejects **100.0%** of structural/valence hallucinations, but cannot catch physics violations, pseudo-first-order unit traps, or speciation contradictions without the full Domain-Physics & Dual-Verification Auditor.*
+Within the constructed fixtures, a target counts when an accepted record matches its answer key. An injected trap meets its endpoint when absent from accepted records, including when never proposed. The unit/exponent and speciation columns combine the relevant target and trap cases. The final column checks quote offsets and the presence of a 27-character InChIKey.
+
+### Paired replay of saved model responses
+
+The trace file contains 48 DeepSeek responses and 41 Qwen responses. Offline scoring uses the same 41 excerpts, 66 target records and 16 injected traps for both. The model names below are the identifiers stored in the cache. The full pipeline can recover source records using the deterministic parser even when the model returns no usable JSON.
+
+| Stored model | Responses with a JSON records array | Raw F1 | After RDKit F1 | Full pipeline F1 | Full TP / FP / FN |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `deepseek-flash` | 0/41 | 0.00% | 0.00% | 96.97% | 64 / 2 / 2 |
+| `qwen3.8-flash` | 41/41 | 83.44% | 87.50% | 97.78% | 66 / 3 / 0 |
+
+The DeepSeek raw score reflects failure to produce the required JSON in these cached calls. Its full-pipeline records were recovered entirely from the source text. Trap absence counts include cases where the extractor never proposed a trap. Exact character offsets verify that a quote occurs in an excerpt; factual support for an individual field requires inspecting the quote and its context.
+
+Reproduce the paired results with `python scripts/run_live_llm_evaluation.py --cached-only`. This mode performs no network calls and includes malformed cached answers in the denominator. The result file lists the scored and missing document IDs.
+
+[Offline scores and document coverage](results/live_llm_miner_benchmark.json) · [Constructed corpus](data/benchmark_corpus.json)
 
 ### 1. Progressive Pipeline Ablation
 ![Progressive Pipeline Ablation](assets/pipeline_ablation_f1_hallucination.png)
 
-### 2. Unit Normalization & Logarithmic Parity Audit Map
+### 2. Unit and logarithmic consistency in constructed excerpts
 ![Unit and pH Consistency Audit](assets/unit_and_pH_consistency_audit.png)
+
+The parity plot uses the 87 of 98 candidate traces with a positive standardized rate and a reported log value. Both coordinates come from the constructed excerpt and its parse.
 
 ### 3. Henderson–Hasselbalch Speciation Physics Verification
 ![Speciation Physics Verification](assets/speciation_physics_verification.png)
 
-### 4. Literature / OCR / LLM Failure Taxonomy Across Chemical Families
+The plotted curves use the parameters in the figure script. Markers illustrate constructed examples, including contradictions and swaps.
+
+### 4. Annotated cases and expected outputs across chemical families
 ![Provenance Error Taxonomy](assets/provenance_error_taxonomy.png)
 
 ---
@@ -192,7 +211,7 @@ ChemLit-Kinetics-Miner/
 │   ├── mcp_server.py        # Standard MCP JSON-RPC 2.0 stdio server & tool registry
 │   └── cli.py               # Command-line interface (`extract`, `validate`, `speciation`, `mcp`)
 ├── data/
-│   └── benchmark_corpus.json # 48 realistic literature excerpts (80 gold records + 18 failure traps)
+│   └── benchmark_corpus.json # 48 constructed literature-style excerpts (80 gold records + 18 failure traps)
 ├── scripts/
 │   ├── build_benchmark_corpus.py
 │   ├── run_evaluation.py    # Computes real ablation metrics -> results/
@@ -202,7 +221,7 @@ ChemLit-Kinetics-Miner/
 │   └── error_breakdown.csv  # Caught failure taxonomy across 6 chemical families
 ├── assets/                  # 300 DPI benchmark & domain-physics diagnostic figures
 ├── tests/
-│   └── test_miner.py        # 17 comprehensive pytest unit & integration tests
+│   └── test_miner.py        # Unit and integration tests
 ├── pyproject.toml
 ├── requirements.txt
 └── LICENSE

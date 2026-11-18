@@ -1268,11 +1268,12 @@ def main() -> None:
     corpus = {
         "benchmark_name": "ChemLit-Kinetics-Miner Gold Benchmark v1.0",
         "description": (
-            "48 environmental oxidation literature excerpts (Markdown tables, LaTeX tabulars, "
+            "48 project-authored environmental oxidation test excerpts (Markdown tables, LaTeX tabulars, "
             "and scientific OCR/prose) across 6 micropollutant families (Phenols, Sulfonamides, "
             "Beta-blockers, Triazines, Olefins, Amines) with gold canonical RDKit structures, "
             "standardized rate constants (M^-1 s^-1), and injected failure modes."
         ),
+        "provenance": "Constructed fixtures with embedded answer keys. Citation notes give background; independent source-document transcription has not been verified.",
         "num_documents": len(excerpts),
         "num_gold_records": total_gold,
         "num_injected_traps": total_traps,

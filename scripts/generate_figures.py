@@ -252,7 +252,7 @@ def fig1_pipeline_ablation(bench: Dict[str, Any], assets_dir: Path) -> Path:
     f1 = [p["f1"] * 100 for p in pipelines]
     fp_contam = [p["false_positive_contamination_rate"] * 100 for p in pipelines]
 
-    trap_rej = [p["hallucination_rejection_rate"] * 100 for p in pipelines]
+    traps_absent = [p["hallucination_rejection_rate"] * 100 for p in pipelines]
     unit_catch = [p["unit_and_exponent_error_catch_rate"] * 100 for p in pipelines]
     spec_catch = [p["speciation_and_ph_swap_catch_rate"] * 100 for p in pipelines]
 
@@ -334,14 +334,14 @@ def fig1_pipeline_ablation(bench: Dict[str, Any], assets_dir: Path) -> Path:
     _style_axis_ticks_and_grid(ax1, kind="categorical_vbar")
     ax1.legend(loc="upper left", ncol=2, frameon=True, fancybox=False)
 
-    # Panel (b): Cheminformatics & Physical Chemistry Guardrail Coverage
+    # Target records must match the answer key; injected traps must be absent.
     x2 = np.arange(len(short_labels)) * 1.24
     w2 = 0.285
     c1 = ax2.bar(
         x2 - w2,
-        trap_rej,
+        traps_absent,
         w2,
-        label="Hallucination & Trap Rejection",
+        label="Injected traps absent from accepted output",
         color=JOURNAL_PALETTE["plum"],
         edgecolor="#111111",
         linewidth=0.95,
@@ -351,7 +351,7 @@ def fig1_pipeline_ablation(bench: Dict[str, Any], assets_dir: Path) -> Path:
         x2,
         unit_catch,
         w2,
-        label="Unit & OCR-Exponent Catch/Repair",
+        label="Unit / exponent cases with expected output",
         color=JOURNAL_PALETTE["ochre"],
         edgecolor="#111111",
         linewidth=0.95,
@@ -361,7 +361,7 @@ def fig1_pipeline_ablation(bench: Dict[str, Any], assets_dir: Path) -> Path:
         x2 + w2,
         spec_catch,
         w2,
-        label=r"Speciation & $\mathrm{pH}\leftrightarrow\mathrm{p}K_a$ Swap Audit",
+        label=r"Speciation cases with expected output",
         color=JOURNAL_PALETTE["emerald"],
         edgecolor="#111111",
         linewidth=0.95,
@@ -386,19 +386,20 @@ def fig1_pipeline_ablation(bench: Dict[str, Any], assets_dir: Path) -> Path:
     ax2.set_xlim(x2[0] - 0.60, x2[-1] + 0.60)
     ax2.set_ylim(0, 125)
     ax2.set_yticks([0, 20, 40, 60, 80, 100])
-    ax2.set_ylabel("Audit Catch / Resolution Rate (%)")
-    ax2.set_title("(b) Cheminformatics & Physical Chemistry Guardrail Coverage", pad=11)
+    ax2.set_ylabel("Cases meeting their endpoint (%)")
+    ax2.set_title("(b) Target recovery and trap absence", pad=11)
     _style_axis_ticks_and_grid(ax2, kind="categorical_vbar")
     ax2.legend(loc="upper left", frameon=True, fancybox=False)
 
     fig.suptitle(
         f"ChemLit-Kinetics-Miner Progressive Pipeline Ablation "
-        f"({bench['num_documents']} Excerpts, {bench['num_gold_records']} Gold Records, "
+        f"({bench['num_documents']} Constructed Excerpts, {bench['num_gold_records']} Target Records, "
         f"{bench['num_injected_traps']} Injected Traps)",
         fontsize=13.2,
         y=1.01,
     )
 
+    fig.text(0.5, -0.015, "A correct target must match the answer key. A trap meets its endpoint when absent from accepted output, including when never proposed.", ha="center", fontsize=10)
     _finalize_journal_figure(fig)
     out_path = assets_dir / "pipeline_ablation_f1_hallucination.png"
     fig.savefig(out_path, dpi=300, bbox_inches="tight", facecolor="#FFFFFF")
@@ -462,10 +463,10 @@ def fig2_unit_and_ph_consistency_audit(bench: Dict[str, Any], assets_dir: Path) 
         flags = pt.get("error_flags") or []
         repairs = " ".join(pt.get("repairs_applied") or [])
 
-        if std_k is None or std_k <= 0:
+        if rep_log is None or std_k is None or std_k <= 0:
             continue
         std_log = math.log10(std_k)
-        x_val = rep_log if rep_log is not None else std_log
+        x_val = rep_log
 
         if status == "FLAGGED_ERROR":
             if "EXCEEDS_SMOLUCHOWSKI_DIFFUSION_LIMIT" in flags:
@@ -529,7 +530,7 @@ def fig2_unit_and_ph_consistency_audit(bench: Dict[str, Any], assets_dir: Path) 
         edgecolors="#FFFFFF",
         linewidth=0.75,
         alpha=0.92,
-        label=rf"Verified Gold Records ($n = {len(verified_x)}$)",
+        label=rf"Accepted candidates ($n = {len(verified_x)}$)",
         zorder=5,
     )
     ax.scatter(
@@ -639,9 +640,9 @@ def fig2_unit_and_ph_consistency_audit(bench: Dict[str, Any], assets_dir: Path) 
 
     ax.set_xlim(lim_min, lim_max)
     ax.set_ylim(lim_min, lim_max)
-    ax.set_xlabel(r"Reported Reference $\log_{10} k\ (\mathrm{M^{-1}\,s^{-1}})$")
+    ax.set_xlabel(r"Log value in fixture $\log_{10} k\ (\mathrm{M^{-1}\,s^{-1}})$")
     ax.set_ylabel(r"Candidate / Standardized $\log_{10} k\ (\mathrm{M^{-1}\,s^{-1}})$")
-    ax.set_title("Unit & Logarithmic Parity Audit Map Across 14 Orders of Magnitude", pad=12)
+    ax.set_title("Unit and log consistency on constructed excerpts with a reported log value", pad=12)
     _style_axis_ticks_and_grid(ax, kind="continuous")
     ax.legend(loc="lower right", frameon=True, fancybox=False, fontsize=8.4)
 
@@ -796,7 +797,7 @@ def fig3_speciation_physics_verification(assets_dir: Path) -> Path:
         color=JOURNAL_PALETTE["slate"],
         edgecolors="#111111",
         linewidth=0.95,
-        label=r"Verified Experimental $k_{\mathrm{app}}(\mathrm{pH})$",
+        label=r"Illustrative fixture value $k_{\mathrm{app}}(\mathrm{pH})$",
     )
     ax.scatter(
         [],
@@ -849,7 +850,7 @@ def fig3_speciation_physics_verification(assets_dir: Path) -> Path:
     )
     ax.annotate(
         "2,4,6-TCP Speciation Violation\n"
-        "Reported $\\log_{10} k = 2.70$ vs. $\\alpha_0 k_{\\mathrm{HA}} + \\alpha_1 k_{\\mathrm{A}^-} = 8.32$",
+        "Reported $\\log_{10} k = 2.70$ vs. predicted $\\log_{10} k = 8.32$",
         xy=(6.0, math.log10(500.0)),
         xytext=(3.55, -0.55),
         fontsize=8.4,
@@ -861,10 +862,10 @@ def fig3_speciation_physics_verification(assets_dir: Path) -> Path:
 
     ax.set_xlim(1.5, 11.8)
     ax.set_ylim(-0.95, 10.65)
-    ax.set_xlabel(r"Aqueous Experimental $\mathrm{pH}$")
+    ax.set_xlabel(r"Illustrative aqueous $\mathrm{pH}$")
     ax.set_ylabel(r"Apparent Ozonation Rate Constant $\log_{10} k_{\mathrm{O_3,app}}\ (\mathrm{M^{-1}\,s^{-1}})$")
     ax.set_title(
-        "Henderson–Hasselbalch Speciation Physics Auditor Across Dissociating Micropollutants",
+        "Henderson–Hasselbalch speciation on constructed examples",
         pad=12,
     )
     _style_axis_ticks_and_grid(ax, kind="continuous")
@@ -878,7 +879,7 @@ def fig3_speciation_physics_verification(assets_dir: Path) -> Path:
 
 
 def fig4_provenance_error_taxonomy(csv_path: Path, assets_dir: Path) -> Path:
-    """Figure 4: Breakdown of Caught Literature / OCR / LLM Failure Modes Across Chemical Families."""
+    """Figure 4: Occurrence counts and scored endpoints on constructed excerpts."""
     rows: List[Dict[str, Any]] = []
     with csv_path.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -979,8 +980,8 @@ def fig4_provenance_error_taxonomy(csv_path: Path, assets_dir: Path) -> Path:
     ax1.set_yticklabels(families)
     ax1.invert_yaxis()
     ax1.set_xlim(0, max(lefts) * 1.18)
-    ax1.set_xlabel("Injected Stress-Test / Failure-Mode Instances")
-    ax1.set_title("(a) Failure & Repair Taxonomy by Chemical Family", pad=11)
+    ax1.set_xlabel("Annotated target records and injected traps")
+    ax1.set_title("(a) Annotated cases in constructed excerpts", pad=11)
     _style_axis_ticks_and_grid(ax1, kind="categorical_hbar")
 
     handles, labels = ax1.get_legend_handles_labels()
@@ -1009,7 +1010,7 @@ def fig4_provenance_error_taxonomy(csv_path: Path, assets_dir: Path) -> Path:
     ax2.set_xticklabels(["1. Baseline", "2. + RDKit Gate", "3. Full Miner"])
     ax2.set_yticks(np.arange(len(heat_modes)))
     ax2.set_yticklabels(heat_modes, fontsize=8.6)
-    ax2.set_title("(b) Failure Catch / Auto-Repair Rate by Pipeline (%)", pad=11)
+    ax2.set_title("(b) Share meeting the expected output (%)", pad=11)
     _style_axis_ticks_and_grid(ax2, kind="heatmap")
 
     # Crisp subtle cell borders inside heatmap
@@ -1036,8 +1037,9 @@ def fig4_provenance_error_taxonomy(csv_path: Path, assets_dir: Path) -> Path:
     cbar.outline.set_edgecolor("#111111")
     cbar.outline.set_linewidth(1.15)
     cbar.ax.tick_params(direction="in", length=3.8, width=1.1, colors="#111111")
-    cbar.set_label("Catch / Resolution Rate (%)")
+    cbar.set_label("Expected output (%)")
 
+    fig.text(0.5, -0.255, "A correct target must match the answer key. A trap meets its endpoint when absent from accepted output, including when never proposed.", ha="center", fontsize=10)
     _finalize_journal_figure(fig)
     out_path = assets_dir / "provenance_error_taxonomy.png"
     fig.savefig(out_path, dpi=300, bbox_inches="tight", facecolor="#FFFFFF")

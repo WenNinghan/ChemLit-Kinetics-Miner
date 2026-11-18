@@ -1,0 +1,156 @@
+{
+  "benchmark": "ChemLit-Kinetics-Miner Real Live-LLM Extraction & Physics Verification Benchmark",
+  "protocol": "Anthropic /v1/messages",
+  "num_excerpts": 48,
+  "num_paired_excerpts": 41,
+  "paired_doc_ids": [
+    "DOC_002",
+    "DOC_003",
+    "DOC_004",
+    "DOC_006",
+    "DOC_010",
+    "DOC_011",
+    "DOC_014",
+    "DOC_015",
+    "DOC_016",
+    "DOC_017",
+    "DOC_018",
+    "DOC_019",
+    "DOC_020",
+    "DOC_021",
+    "DOC_022",
+    "DOC_023",
+    "DOC_024",
+    "DOC_025",
+    "DOC_026",
+    "DOC_027",
+    "DOC_028",
+    "DOC_029",
+    "DOC_030",
+    "DOC_031",
+    "DOC_032",
+    "DOC_033",
+    "DOC_034",
+    "DOC_035",
+    "DOC_036",
+    "DOC_037",
+    "DOC_038",
+    "DOC_039",
+    "DOC_040",
+    "DOC_041",
+    "DOC_042",
+    "DOC_043",
+    "DOC_044",
+    "DOC_045",
+    "DOC_046",
+    "DOC_047",
+    "DOC_048"
+  ],
+  "missing_doc_ids": {
+    "deepseek-flash": [],
+    "qwen3.8-flash": [
+      "DOC_001",
+      "DOC_005",
+      "DOC_007",
+      "DOC_008",
+      "DOC_009",
+      "DOC_012",
+      "DOC_013"
+    ]
+  },
+  "total_cached_llm_calls": 89,
+  "models": [
+    {
+      "model": "deepseek-flash",
+      "responses_with_records_array": 0,
+      "mean_tokens_per_excerpt": 423.6,
+      "stages": {
+        "raw_llm": {
+          "label": "1. Raw Single-Pass LLM (deepseek-flash)",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fp_contamination_rate": 0.0,
+          "trap_absence_rate": 1.0,
+          "traps_absent_from_accepted": 16,
+          "total_traps": 16,
+          "tp": 0,
+          "fp": 0,
+          "fn": 66
+        },
+        "llm_rdkit": {
+          "label": "2. deepseek-flash + RDKit Structure Gate",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "fp_contamination_rate": 0.0,
+          "trap_absence_rate": 1.0,
+          "traps_absent_from_accepted": 16,
+          "total_traps": 16,
+          "tp": 0,
+          "fp": 0,
+          "fn": 66
+        },
+        "llm_full_miner": {
+          "label": "3. deepseek-flash + ChemLit-Kinetics-Miner (Full Physics & Prose Audit)",
+          "precision": 0.9697,
+          "recall": 0.9697,
+          "f1": 0.9697,
+          "fp_contamination_rate": 0.0303,
+          "trap_absence_rate": 1.0,
+          "traps_absent_from_accepted": 16,
+          "total_traps": 16,
+          "tp": 64,
+          "fp": 2,
+          "fn": 2
+        }
+      }
+    },
+    {
+      "model": "qwen3.8-flash",
+      "responses_with_records_array": 41,
+      "mean_tokens_per_excerpt": 916.2,
+      "stages": {
+        "raw_llm": {
+          "label": "1. Raw Single-Pass LLM (qwen3.8-flash)",
+          "precision": 0.7412,
+          "recall": 0.9545,
+          "f1": 0.8344,
+          "fp_contamination_rate": 0.2588,
+          "trap_absence_rate": 0.0625,
+          "traps_absent_from_accepted": 1,
+          "total_traps": 16,
+          "tp": 63,
+          "fp": 22,
+          "fn": 3
+        },
+        "llm_rdkit": {
+          "label": "2. qwen3.8-flash + RDKit Structure Gate",
+          "precision": 0.8077,
+          "recall": 0.9545,
+          "f1": 0.875,
+          "fp_contamination_rate": 0.1923,
+          "trap_absence_rate": 0.5,
+          "traps_absent_from_accepted": 8,
+          "total_traps": 16,
+          "tp": 63,
+          "fp": 15,
+          "fn": 3
+        },
+        "llm_full_miner": {
+          "label": "3. qwen3.8-flash + ChemLit-Kinetics-Miner (Full Physics & Prose Audit)",
+          "precision": 0.9565,
+          "recall": 1.0,
+          "f1": 0.9778,
+          "fp_contamination_rate": 0.0435,
+          "trap_absence_rate": 1.0,
+          "traps_absent_from_accepted": 16,
+          "total_traps": 16,
+          "tp": 66,
+          "fp": 3,
+          "fn": 0
+        }
+      }
+    }
+  ]
+}
